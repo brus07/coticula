@@ -1,0 +1,30 @@
+﻿@model Coticula.Web.Models.Solution
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Solution</legend>
+
+    <div class="display-label">DateTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTime)
+    </div>
+
+    <div class="display-label">Answer</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Answer)
+    </div>
+
+    <div class="display-label">Language</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Language.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

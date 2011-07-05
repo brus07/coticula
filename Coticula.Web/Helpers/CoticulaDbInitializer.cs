@@ -10,23 +10,48 @@ namespace Coticula.Web.Helpers
         {
             base.Seed(context);
 
+            Language pascal = new Language {Name = "Pascal"};
+            Language cpp = new Language {Name = "C++"};
+            context.Languages.Add(pascal);
+            context.Languages.Add(cpp);
+
+            Verdict inQueue = new Verdict {Name = "In queue"};
+            Verdict accepted = new Verdict {Name = "Accepted"};
+            context.Verdicts.Add(inQueue);
+            context.Verdicts.Add(accepted);
+
             Solution sol1 = new Solution
             {
                 Answer = "begin end.",
                 DateTime = DateTime.Now,
-                Language = new Language { Name = "Pascal" },
+                Language = pascal,
             };
             Result res1 = new Result
             {
-                Verdict = new Verdict { Name = "In queue" }
+                Verdict = accepted
             };
             sol1.Result = res1;
             res1.Solution = sol1;
 
+            Solution sol2 = new Solution
+            {
+                Answer = "begin end.",
+                DateTime = DateTime.Now,
+                Language = cpp,
+            };
+            Result res2 = new Result
+            {
+                Verdict = inQueue
+            };
+            sol2.Result = res2;
+            res2.Solution = sol2;
+
             context.Solutions.Add(sol1);
             context.Results.Add(res1);
+            context.Solutions.Add(sol2);
+            context.Results.Add(res2);
 
-            int a = context.SaveChanges();
+            context.SaveChanges();
         }
     }
 }
