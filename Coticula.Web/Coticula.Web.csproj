@@ -67,7 +67,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CoticulaDbInitializer.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CoticulaDbContext.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Solution.cs" />
+    <Compile Include="Models\Verdict.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
