@@ -1,10 +1,10 @@
 ﻿@model Coticula.Web.Models.Solution
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = string.Format("Details solution ID={0}", Model.Id);
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <fieldset>
     <legend>Solution</legend>
