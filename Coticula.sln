@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.Web", "Coticula.Web\Coticula.Web.csproj", "{86062CE8-C9E7-42CA-B98A-12E4AB162DB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.Web.Tests", "Coticula.Web.Tests\Coticula.Web.Tests.csproj", "{2AE39494-B533-4EB8-B6ED-3D30A8381D13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{86062CE8-C9E7-42CA-B98A-12E4AB162DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86062CE8-C9E7-42CA-B98A-12E4AB162DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86062CE8-C9E7-42CA-B98A-12E4AB162DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE39494-B533-4EB8-B6ED-3D30A8381D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE39494-B533-4EB8-B6ED-3D30A8381D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE39494-B533-4EB8-B6ED-3D30A8381D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE39494-B533-4EB8-B6ED-3D30A8381D13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
