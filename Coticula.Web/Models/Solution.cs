@@ -3,11 +3,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Coticula.Web.Models
 {
-    public class Solution
+    public sealed class Solution
     {
-        public int Id { get; set; }
+        public Solution()
+        {
+            Result = new Result();
+        }
 
-        public virtual Result Result { get; set; }
+        private int _id;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                Result.Id = Id;
+            }
+        }
+
+        public Result Result { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
@@ -17,6 +34,6 @@ namespace Coticula.Web.Models
 
         [Required]
         public int LanguageId { get; set; }
-        public virtual Language Language { get; set; }
+        public Language Language { get; set; }
     }
 }

@@ -10,13 +10,13 @@ namespace Coticula.Web.Helpers
         {
             base.Seed(context);
 
-            Language pascal = new Language {Name = "Pascal"};
-            Language cpp = new Language {Name = "C++"};
+            Language pascal = new Language { Name = "Pascal" };
+            Language cpp = new Language { Name = "C++" };
             context.Languages.Add(pascal);
             context.Languages.Add(cpp);
 
-            Verdict inQueue = new Verdict {Name = "In queue"};
-            Verdict accepted = new Verdict {Name = "Accepted"};
+            Verdict inQueue = new Verdict { Id = 1, Name = "In queue" };
+            Verdict accepted = new Verdict { Id = 2, Name = "Accepted" };
             context.Verdicts.Add(inQueue);
             context.Verdicts.Add(accepted);
 

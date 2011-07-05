@@ -68,7 +68,7 @@ namespace Coticula.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
+        {
             Solution solution = db.Solutions.Find(id);
             db.Solutions.Remove(solution);
             db.SaveChanges();
