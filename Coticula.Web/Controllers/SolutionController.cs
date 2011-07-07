@@ -8,15 +8,15 @@ namespace Coticula.Web.Controllers
 { 
     public class SolutionController : Controller
     {
-        private CoticulaDbContext db = new CoticulaDbContext();
+        private readonly CoticulaDbContext _db = new CoticulaDbContext();
 
         //
         // GET: /Solution/
 
         public ViewResult Index()
         {
-            var solutions = db.Solutions.Include(s => s.Language);
-            return View(solutions.ToList());
+            var results = _db.Results.Include(r => r.Verdict).Include(r=>r.Solution.Language);
+            return View(results.ToList());
         }
 
         //
@@ -24,8 +24,8 @@ namespace Coticula.Web.Controllers
 
         public ViewResult Details(int id)
         {
-            Solution solution = db.Solutions.Find(id);
-            return View(solution);
+            var result = _db.Results.Include(r => r.Solution.Language).Single(r => r.Id == id);
+            return View(result);
         }
         
         //
@@ -33,25 +33,25 @@ namespace Coticula.Web.Controllers
  
         public ActionResult Edit(int id)
         {
-            Solution solution = db.Solutions.Find(id);
-            ViewBag.LanguageId = new SelectList(db.Languages, "Id", "Name", solution.LanguageId);
-            return View(solution);
+            var result = _db.Results.Find(id);
+            ViewBag.VerdictId = new SelectList(_db.Verdicts, "Id", "Name", result.VerdictId);
+            return View(result);
         }
 
         //
         // POST: /Solution/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Solution solution)
+        public ActionResult Edit(Result result)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(solution).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(result).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LanguageId = new SelectList(db.Languages, "Id", "Name", solution.LanguageId);
-            return View(solution);
+            ViewBag.VerdictId = new SelectList(_db.Verdicts, "Id", "Name", result.VerdictId);
+            return View(result);
         }
 
         //
@@ -59,8 +59,8 @@ namespace Coticula.Web.Controllers
  
         public ActionResult Delete(int id)
         {
-            Solution solution = db.Solutions.Find(id);
-            return View(solution);
+            var result = _db.Results.Find(id);
+            return View(result);
         }
 
         //
@@ -68,16 +68,16 @@ namespace Coticula.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {
-            Solution solution = db.Solutions.Find(id);
-            db.Solutions.Remove(solution);
-            db.SaveChanges();
+        {            
+            var result = _db.Results.Find(id);
+            _db.Results.Remove(result);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }

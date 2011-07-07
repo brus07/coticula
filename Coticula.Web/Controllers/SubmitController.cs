@@ -5,14 +5,14 @@ namespace Coticula.Web.Controllers
 { 
     public class SubmitController : Controller
     {
-        private CoticulaDbContext db = new CoticulaDbContext();
+        private readonly CoticulaDbContext _db = new CoticulaDbContext();
 
         //
         // GET: /Submit/
 
         public ViewResult Index()
         {
-            ViewBag.LanguageId = new SelectList(db.Languages, "Id", "Name");
+            ViewBag.LanguageId = new SelectList(_db.Languages, "Id", "Name");
             return View();
         }
 
@@ -24,18 +24,19 @@ namespace Coticula.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Solutions.Add(solution);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Solution");  
+                var result = new Result {Solution = solution};
+                _db.Results.Add(result);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Solution");
             }
 
-            ViewBag.LanguageId = new SelectList(db.Languages, "Id", "Name", solution.LanguageId);
+            ViewBag.LanguageId = new SelectList(_db.Languages, "Id", "Name", solution.LanguageId);
             return View(solution);
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }

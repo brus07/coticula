@@ -3,31 +3,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Coticula.Web.Models
 {
-    public sealed class Solution
+    public class Solution
     {
-        public Solution()
-        {
-            Result = new Result();
-        }
-
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                Result.Id = Id;
-            }
-        }
-
-        public Result Result { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
+        public long Time { get; set; }
+
+        [NotMapped]
+        public DateTime DateTime
+        {
+            get { return DateTime.FromFileTimeUtc(Time).ToLocalTime(); }
+            set { Time = value.ToFileTimeUtc(); }
+        }
 
         [StringLength(65000)]
         public String Answer { get; set; }

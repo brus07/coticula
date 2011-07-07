@@ -10,41 +10,39 @@ namespace Coticula.Web.Helpers
         {
             base.Seed(context);
 
-            Language pascal = new Language { Name = "Pascal" };
-            Language cpp = new Language { Name = "C++" };
+            var pascal = new Language { Name = "Pascal" };
+            var cpp = new Language { Name = "C++" };
             context.Languages.Add(pascal);
             context.Languages.Add(cpp);
 
-            Verdict inQueue = new Verdict { Id = 1, Name = "In queue" };
-            Verdict accepted = new Verdict { Id = 2, Name = "Accepted" };
+            var inQueue = new Verdict { Id = 1, Name = "In queue" };
+            var accepted = new Verdict { Id = 2, Name = "Accepted" };
             context.Verdicts.Add(inQueue);
             context.Verdicts.Add(accepted);
 
-            Solution sol1 = new Solution
+            var sol1 = new Solution
             {
                 Answer = "begin end.",
                 DateTime = DateTime.Now,
                 Language = pascal,
             };
-            Result res1 = new Result
-            {
-                Verdict = accepted
-            };
-            sol1.Result = res1;
-            res1.Solution = sol1;
+            var res1 = new Result
+                           {
+                               Verdict = accepted,
+                               Solution = sol1
+                           };
 
-            Solution sol2 = new Solution
+            var sol2 = new Solution
             {
                 Answer = "begin end.",
                 DateTime = DateTime.Now,
                 Language = cpp,
             };
-            Result res2 = new Result
-            {
-                Verdict = inQueue
-            };
-            sol2.Result = res2;
-            res2.Solution = sol2;
+            var res2 = new Result
+                           {
+                               Verdict = inQueue,
+                               Solution = sol2
+                           };
 
             context.Solutions.Add(sol1);
             context.Results.Add(res1);

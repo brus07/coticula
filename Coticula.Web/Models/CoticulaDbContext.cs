@@ -11,7 +11,7 @@ namespace Coticula.Web.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Solution>().HasRequired(x => x.Result).WithRequiredPrincipal(t => t.Solution).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Result>().HasRequired(x => x.Solution).WithMany().WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }

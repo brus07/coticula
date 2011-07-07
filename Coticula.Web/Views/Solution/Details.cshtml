@@ -1,27 +1,32 @@
-﻿@model Coticula.Web.Models.Solution
+﻿@model Coticula.Web.Models.Result
 
 @{
-    ViewBag.Title = string.Format("Details solution ID={0}", Model.Id);
+    ViewBag.Title = string.Format("Solution details ID={0}", Model.Id);
 }
 
 <h2>@ViewBag.Title</h2>
 
 <fieldset>
-    <legend>Solution</legend>
+    <legend>Result</legend>
 
     <div class="display-label">DateTime</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.DateTime)
-    </div>
-
-    <div class="display-label">Answer</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Answer)
+        @Html.DisplayFor(model => model.Solution.DateTime)
     </div>
 
     <div class="display-label">Language</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Language.Name)
+        @Html.DisplayFor(model => model.Solution.Language.Name)
+    </div>
+
+    <div class="display-label">Answer</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Solution.Answer)
+    </div>
+
+    <div class="display-label">Verdict</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Verdict.Name)
     </div>
 </fieldset>
 <p>

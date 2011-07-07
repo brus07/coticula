@@ -1,18 +1,34 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Coticula.Web.Models
 {
-    public class Result
+    public sealed class Result
     {
         public Result()
         {
             VerdictId = 1;
+            Solution = new Solution();
         }
 
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                Solution.Id = Id;
+            }
+        }
 
         public int VerdictId { get; set; }
-        public virtual Verdict Verdict { get; set; }
+        public Verdict Verdict { get; set; }
 
-        public virtual Solution Solution { get; set; }
+        [Required]
+        public Solution Solution { get; set; }
     }
 }

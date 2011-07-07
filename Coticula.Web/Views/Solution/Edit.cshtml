@@ -1,7 +1,7 @@
-﻿@model Coticula.Web.Models.Solution
+﻿@model Coticula.Web.Models.Result
 
 @{
-    ViewBag.Title = string.Format("Edit solution ID={0}", Model.Id);
+    ViewBag.Title = string.Format("Edit result ID={0}", Model.Id);
 }
 
 <h2>@ViewBag.Title</h2>
@@ -12,32 +12,16 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Solution</legend>
+        <legend>Result</legend>
 
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DateTime)
+            @Html.LabelFor(model => model.VerdictId, "Verdict")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DateTime)
-            @Html.ValidationMessageFor(model => model.DateTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Answer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Answer)
-            @Html.ValidationMessageFor(model => model.Answer)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LanguageId, "Language")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("LanguageId", String.Empty)
-            @Html.ValidationMessageFor(model => model.LanguageId)
+            @Html.DropDownList("VerdictId", String.Empty)
+            @Html.ValidationMessageFor(model => model.VerdictId)
         </div>
 
         <p>

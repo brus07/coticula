@@ -1,4 +1,4 @@
-﻿@model Coticula.Web.Models.Solution
+﻿@model Coticula.Web.Models.Result
 
 @{
     ViewBag.Title = string.Format("Delete solution ID={0}", Model.Id);
@@ -7,24 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Solution</legend>
 
-    <div class="display-label">DateTime</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DateTime)
-    </div>
-
-    <div class="display-label">Answer</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Answer)
-    </div>
-
-    <div class="display-label">Language</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Language.Name)
-    </div>
-</fieldset>
 @using (Html.BeginForm()) {
     <p>
         <input type="submit" value="Delete" /> |

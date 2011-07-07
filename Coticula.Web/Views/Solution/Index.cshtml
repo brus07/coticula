@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Coticula.Web.Models.Solution>
+﻿@model IEnumerable<Coticula.Web.Models.Result>
 
 @{
-    ViewBag.Title = "Solution list";
+    ViewBag.Title = "Result list";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -12,13 +12,16 @@
 <table>
     <tr>
         <th>
-            DateTime
+            Id
         </th>
         <th>
-            Answer
+            Time
         </th>
         <th>
             Language
+        </th>
+        <th>
+            Verdict
         </th>
         <th></th>
     </tr>
@@ -26,13 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DateTime)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Answer)
+            @Html.DisplayFor(modelItem => item.Solution.DateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Language.Name)
+            @Html.DisplayFor(modelItem => item.Solution.Language.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Verdict.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
