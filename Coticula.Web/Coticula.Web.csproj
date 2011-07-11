@@ -64,12 +64,14 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\SolutionController.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CoticulaDbInitializer.cs" />
+    <Compile Include="Helpers\RenderJsonResult.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CoticulaDbContext.cs" />
     <Compile Include="Models\Language.cs" />
@@ -167,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Submit\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coticula.DTO\Coticula.DTO.csproj">
+      <Project>{40272F33-01B4-4E2F-B020-84DE8310780F}</Project>
+      <Name>Coticula.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
