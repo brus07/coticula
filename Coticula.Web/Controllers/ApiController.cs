@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Coticula.DTO;
 using Coticula.Web.Models;
 
 namespace Coticula.Web.Controllers
@@ -10,14 +10,6 @@ namespace Coticula.Web.Controllers
     public class ApiController : Controller
     {
         private readonly CoticulaDbContext _db = new CoticulaDbContext();
-
-        //
-        // GET: /Api/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         //
         // GET: /Api/Untested.json
@@ -39,7 +31,7 @@ namespace Coticula.Web.Controllers
             if (format != "json")
                 return null;
 
-            var result =_db.Results.Include(r => r.Solution.Language).Single(r => r.Id == id);
+            var result = _db.Results.Include(r => r.Solution.Language).Single(r => r.Id == id);
 
             var solution = new DTO.Solution
             {
@@ -62,7 +54,7 @@ namespace Coticula.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var res = new Result {Id = result.Id, VerdictId = result.VerdictId};
+                var res = new DTO.Result { Id = result.Id, VerdictId = result.VerdictId };
                 try
                 {
                     _db.Entry(res).State = EntityState.Modified;
@@ -74,7 +66,14 @@ namespace Coticula.Web.Controllers
 
                 }
             }
-            return Json("error");
+            return Json(new ErrorMessage
+                            {
+                                Error = new ErrorMessage.ConctreteError
+                                            {
+                                                Type = "Not valid",
+                                                Message = "\"Result\" not valid."
+                                            }
+                            });
         }
 
     }

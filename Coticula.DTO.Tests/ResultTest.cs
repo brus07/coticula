@@ -9,7 +9,7 @@ namespace Coticula.DTO.Tests
         public void TestIdProperty()
         {
             const int id = 47;
-            var result = new Result() { Id = id };
+            var result = new Result { Id = id };
             Assert.AreEqual(id, result.Id);
         }
 
@@ -17,7 +17,7 @@ namespace Coticula.DTO.Tests
         public void TestVerdictIdProperty()
         {
             const int verdictId = 74;
-            var result = new Result() { VerdictId = verdictId };
+            var result = new Result { VerdictId = verdictId };
             Assert.AreEqual(verdictId, result.VerdictId);
         }
 
@@ -26,7 +26,7 @@ namespace Coticula.DTO.Tests
         {
             const int id = 47;
             const int verdictId = 74;
-            var result = new Result()
+            var result = new Result
             {
                 Id = id,
                 VerdictId = verdictId
