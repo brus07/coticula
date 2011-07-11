@@ -71,7 +71,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CoticulaDbInitializer.cs" />
-    <Compile Include="Helpers\RenderJsonResult.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CoticulaDbContext.cs" />
     <Compile Include="Models\Language.cs" />
