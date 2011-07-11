@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Coticula.Web.Models
 {
@@ -23,5 +24,14 @@ namespace Coticula.Web.Models
         [Required]
         public int LanguageId { get; set; }
         public Language Language { get; set; }
+
+        public static int[] UntestedId()
+        {
+            var db = new CoticulaDbContext();
+            var results = (from p in db.Results
+                           where p.VerdictId == 1
+                           select  p.Id ); 
+            return results.ToArray();
+        }
     }
 }

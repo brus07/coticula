@@ -63,8 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\SolutionController.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
     <Compile Include="Global.asax.cs">

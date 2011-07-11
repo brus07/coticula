@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Coticula.Web.Helpers;
+using System.Web;
 
 namespace Coticula.Web
 {
@@ -20,14 +21,14 @@ namespace Coticula.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "WithFormat", // Route name
-                "{controller}/{action}/{id}.{format}", // URL with parameters and with format
-                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                "Api", // Route name
+                "{controller}/{action}.json", // URL with parameters and with format
+                new { controller = "Home", action = "Index", format = "json" }
                 );
             routes.MapRoute(
-                "ResultEditWithFormat", // Route name
-                "Result.{format}", // URL with parameters and with format
-                new { controller = "Result", action = "Edit"}
+                "ApiWithParameters", // Route name
+                "{controller}/{action}/{id}.json", // URL with parameters and with format
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional, format = "json"}
                 );
             routes.MapRoute(
                 "Default", // Route name

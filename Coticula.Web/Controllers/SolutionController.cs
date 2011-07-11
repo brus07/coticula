@@ -21,23 +21,11 @@ namespace Coticula.Web.Controllers
 
         //
         // GET: /Solution/Details/5
-        // GET: /Solution/Details/5.json
 
         public ActionResult Details(int id, string format)
         {
             var result = _db.Results.Include(r => r.Solution.Language).Single(r => r.Id == id);
 
-            if (format == "json")
-            {
-                var solution = new DTO.Solution
-                                   {
-                                       Id = result.Id,
-                                       Answer = result.Solution.Answer,
-                                       LanguageId = result.Solution.LanguageId
-                                   };
-
-                return Json(solution, JsonRequestBehavior.AllowGet);
-            }
             return View(result);
         }
 
