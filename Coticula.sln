@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.DTO", "Coticula.DT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.DTO.Tests", "Coticula.DTO.Tests\Coticula.DTO.Tests.csproj", "{5FCD61B4-5DC9-4D6F-871B-25A0EFC67261}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.Core", "Coticula.Core\Coticula.Core.csproj", "{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coticula.Core.Tests", "Coticula.Core.Tests\Coticula.Core.Tests.csproj", "{C7E3517E-685B-492B-A58E-60853D41BE5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{5FCD61B4-5DC9-4D6F-871B-25A0EFC67261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FCD61B4-5DC9-4D6F-871B-25A0EFC67261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FCD61B4-5DC9-4D6F-871B-25A0EFC67261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E3517E-685B-492B-A58E-60853D41BE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E3517E-685B-492B-A58E-60853D41BE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E3517E-685B-492B-A58E-60853D41BE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E3517E-685B-492B-A58E-60853D41BE5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
