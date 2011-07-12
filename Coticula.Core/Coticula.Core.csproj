@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\ITask.cs" />
+    <Compile Include="Tasks\Solution\GetSolution.cs" />
+    <Compile Include="Tasks\Solution\GetUntested.cs" />
+    <Compile Include="Tasks\Solution\SendResult.cs" />
+    <Compile Include="Tasks\Solution\SolutionTaskCreator.cs" />
+    <Compile Include="Tasks\Solution\TestAllSolutions.cs" />
+    <Compile Include="Tasks\Solution\TestSolution.cs" />
+    <Compile Include="Tasks\TaskCreator.cs" />
+    <Compile Include="Tasks\TasksQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coticula.DTO\Coticula.DTO.csproj">

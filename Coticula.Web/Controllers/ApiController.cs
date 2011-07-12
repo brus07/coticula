@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -54,14 +55,15 @@ namespace Coticula.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var res = new DTO.Result { Id = result.Id, VerdictId = result.VerdictId };
+                var res = _db.Results.Include(r => r.Solution.Language).Single(r => r.Id == result.Id);
+                res.VerdictId = result.VerdictId;
                 try
                 {
                     _db.Entry(res).State = EntityState.Modified;
                     _db.SaveChanges();
                     return Json("ok");
                 }
-                catch
+                catch(Exception ex)
                 {
 
                 }
