@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Channels\WebChannel.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="IChannel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Tasks\Solution\GetSolution.cs" />

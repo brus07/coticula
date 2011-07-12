@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Coticula.Core.Tasks
 {
     static class TaskCreator
     {
-        public static TasksQueue CreateTasksQueue()
+        public static TasksQueue CreateTasksQueue(IChannel channel)
         {
-            return new TasksQueue();
+            return new TasksQueue(channel);
         }
     }
 }

@@ -5,17 +5,17 @@ namespace Coticula.Core.Tasks
 {
     class TasksQueue: ITask
     {
-        //private Queue<ITask> _queue = new Queue<ITask>();
         private Queue<ITask> Queue { get; set; }
 
-        public TasksQueue()
+        public TasksQueue(IChannel channel)
         {
             Queue = new Queue<ITask>();
+            _channel = channel;
         }
 
         public ITask[] Execute()
         {
-            Queue.Enqueue(SolutionTaskCreator.CreateTestAllSolutions());
+            Queue.Enqueue(SolutionTaskCreator.CreateTestAllSolutions(Channel));
             while (Queue.Count > 0)
             {
                 ITask[] newTasks = Queue.Dequeue().Execute();
@@ -25,6 +25,12 @@ namespace Coticula.Core.Tasks
                 }
             }
             return new ITask[0];
+        }
+
+        private readonly IChannel _channel;
+        public IChannel Channel
+        {
+            get { return _channel; }
         }
     }
 }
