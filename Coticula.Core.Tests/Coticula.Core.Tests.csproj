@@ -57,6 +57,10 @@
       <Project>{9FA09BC5-5BA3-4C9C-A4E5-61E310A7B17A}</Project>
       <Name>Coticula.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Coticula.DTO\Coticula.DTO.csproj">
+      <Project>{40272F33-01B4-4E2F-B020-84DE8310780F}</Project>
+      <Name>Coticula.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Channel.cs" />
     <Compile Include="Channels\WebChannel.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="IChannel.cs" />
