@@ -9,5 +9,7 @@ namespace Coticula.DTO
         public String Answer { get; set; }
 
         public int LanguageId { get; set; }
+
+        public int ProblemId { get; set; }
     }
 }

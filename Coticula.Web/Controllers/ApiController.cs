@@ -38,7 +38,8 @@ namespace Coticula.Web.Controllers
             {
                 Id = result.Id,
                 Answer = result.Solution.Answer,
-                LanguageId = result.Solution.LanguageId
+                LanguageId = result.Solution.LanguageId,
+                ProblemId = result.Solution.ProblemId
             };
 
             return Json(solution, JsonRequestBehavior.AllowGet);
