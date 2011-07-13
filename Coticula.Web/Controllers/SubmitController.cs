@@ -12,7 +12,8 @@ namespace Coticula.Web.Controllers
 
         public ViewResult Index()
         {
-            ViewBag.LanguageId = new SelectList(_db.Languages, "Id", "Name");
+            ViewBag.LanguageId = new SelectList(_db.Languages, "Id", "Name", 1);
+            ViewBag.ProblemId = new SelectList(_db.Problems, "Id", "Name", 1);
             return View();
         }
 

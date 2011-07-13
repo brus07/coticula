@@ -31,10 +31,18 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.ProblemId, "Problem")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProblemId")
+            @Html.ValidationMessageFor(model => model.ProblemId)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.LanguageId, "Language")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("LanguageId", String.Empty)
+            @Html.DropDownList("LanguageId")
             @Html.ValidationMessageFor(model => model.LanguageId)
         </div>
 

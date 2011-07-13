@@ -18,7 +18,7 @@ namespace Coticula.Web.Models
             set { Time = value.ToFileTimeUtc(); }
         }
 
-        [StringLength(65000)]
+        [StringLength(65536)]
         public String Answer { get; set; }
 
         [Required]
@@ -33,5 +33,9 @@ namespace Coticula.Web.Models
                            select  p.Id ); 
             return results.ToArray();
         }
+
+        [Required]
+        public int ProblemId { get; set; }
+        public Problem Problem { get; set; }
     }
 }
