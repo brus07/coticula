@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Coticula.Web.Models;
 
 namespace Coticula.Web.Controllers
@@ -14,7 +15,9 @@ namespace Coticula.Web.Controllers
         {
             ViewBag.LanguageId = new SelectList(_db.Languages, "Id", "Name", 1);
             ViewBag.ProblemId = new SelectList(_db.Problems, "Id", "Name", 1);
-            return View();
+            Solution model = new Solution();
+            model.DateTime = DateTime.Now;
+            return View(model);
         }
 
         //
