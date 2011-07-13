@@ -74,6 +74,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CoticulaDbContext.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Problem.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Solution.cs" />
     <Compile Include="Models\Verdict.cs" />

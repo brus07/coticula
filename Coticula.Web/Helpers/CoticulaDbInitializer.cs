@@ -20,11 +20,15 @@ namespace Coticula.Web.Helpers
             context.Verdicts.Add(inQueue);
             context.Verdicts.Add(accepted);
 
+            var problem = new Problem {Id = 1, Name = "First problem", Description = " Very big description of problem"};
+            context.Problems.Add(problem);
+
             var sol1 = new Solution
             {
                 Answer = "begin end.",
                 DateTime = DateTime.Now,
                 Language = pascal,
+                Problem =  problem
             };
             var res1 = new Result
                            {
@@ -37,6 +41,7 @@ namespace Coticula.Web.Helpers
                 Answer = "begin end.",
                 DateTime = DateTime.Now,
                 Language = cpp,
+                Problem = problem
             };
             var res2 = new Result
                            {

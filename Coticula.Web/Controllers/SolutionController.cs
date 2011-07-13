@@ -15,7 +15,7 @@ namespace Coticula.Web.Controllers
 
         public ViewResult Index()
         {
-            var results = _db.Results.Include(r => r.Verdict).Include(r=>r.Solution.Language);
+            var results = _db.Results.Include(r => r.Verdict).Include(r => r.Solution.Language).Include(r => r.Solution.Problem);
             return View(results.ToList());
         }
 
@@ -24,7 +24,7 @@ namespace Coticula.Web.Controllers
 
         public ActionResult Details(int id, string format)
         {
-            var result = _db.Results.Include(r => r.Solution.Language).Single(r => r.Id == id);
+            var result = _db.Results.Include(r => r.Solution.Language).Include(r => r.Solution.Problem).Include(r => r.Verdict).Single(r => r.Id == id);
 
             return View(result);
         }

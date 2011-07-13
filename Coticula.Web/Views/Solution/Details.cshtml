@@ -24,6 +24,11 @@
         @Html.DisplayFor(model => model.Solution.Answer)
     </div>
 
+    <div class="display-label">Problem</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Solution.Problem.Name)
+    </div>
+
     <div class="display-label">Verdict</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Verdict.Name)

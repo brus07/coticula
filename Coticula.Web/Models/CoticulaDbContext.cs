@@ -8,6 +8,7 @@ namespace Coticula.Web.Models
         public DbSet<Result> Results { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Verdict> Verdicts { get; set; }
+        public DbSet<Problem> Problems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
