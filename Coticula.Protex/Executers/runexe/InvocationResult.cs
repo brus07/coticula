@@ -22,6 +22,11 @@ namespace Coticula.Protex.Executers.runexe
     [XmlRoot("invocationResult")]
     public class InvocationResult
     {
+        private InvocationResult()
+        {
+            
+        }
+
         [XmlElement("invocationVerdict")]
         public string InvocationVerdict { get; set; }
 

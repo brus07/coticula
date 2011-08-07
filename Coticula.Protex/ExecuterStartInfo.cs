@@ -8,6 +8,7 @@ namespace Coticula.Protex
         }
 
         public string Command { get; set; }
+
         public string WorkingDirectory { get; set; }
         public string InputStream { get; set; } //maybe need Stream type or specific type
         public string OutputStream { get; set; }

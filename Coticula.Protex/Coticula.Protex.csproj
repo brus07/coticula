@@ -54,6 +54,7 @@
     <Compile Include="ExecuterStartInfo.cs" />
     <Compile Include="Executers\runexe\InvocationResult.cs" />
     <Compile Include="Executers\SimpleExecuter.cs" />
+    <Compile Include="ExecutionVerdict.cs" />
     <Compile Include="IExecuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Executers\runexe\InvocationResultTest.cs" />

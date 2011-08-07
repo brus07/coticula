@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using Coticula.Protex.Executers.runexe;
 
 namespace Coticula.Protex.Executers
@@ -25,20 +26,41 @@ namespace Coticula.Protex.Executers
 
             //runexe.exe -i a.in -t 3500ms -m 2048K -xml a.exe
             string options = "";
+
+            if (executerStartInfo.WorkingDirectory == null)
+                executerStartInfo.WorkingDirectory = "";
+
             //set input file
             if (string.IsNullOrEmpty(executerStartInfo.InputStream) == false)
             {
-                options += " -i " + executerStartInfo.InputStream;
+                options += string.Format(" -i \"{0}\"", Path.Combine(executerStartInfo.WorkingDirectory, executerStartInfo.InputStream));
             }
+
             //set output file
+            string temporaryOutputFile = null;
+            string temporaryDirectory = Path.Combine(Path.GetTempPath(), Assembly.GetExecutingAssembly().GetName().Name);
             if (string.IsNullOrEmpty(executerStartInfo.OutputStream) == false)
             {
-                options += " -o " + executerStartInfo.OutputStream;
+                options += string.Format(" -o \"{0}\"", Path.Combine(executerStartInfo.WorkingDirectory, executerStartInfo.OutputStream));
             }
+            else
+            {
+                temporaryOutputFile = Path.Combine(temporaryDirectory, Path.GetRandomFileName());
+                Directory.CreateDirectory(temporaryDirectory);
+                options += string.Format(" -o \"{0}\"", temporaryOutputFile);
+            }
+
             //set error file
+            string temporaryErrorFile = null;
             if (string.IsNullOrEmpty(executerStartInfo.ErrorStream) == false)
             {
-                options += " -e " + executerStartInfo.ErrorStream;
+                options += string.Format(" -e \"{0}\"", Path.Combine(executerStartInfo.WorkingDirectory, executerStartInfo.ErrorStream));
+            }
+            else
+            {
+                temporaryErrorFile = Path.Combine(temporaryDirectory, Path.GetRandomFileName());
+                Directory.CreateDirectory(temporaryDirectory);
+                options += string.Format(" -e \"{0}\"", temporaryErrorFile);
             }
 
             //set time limit
@@ -50,7 +72,7 @@ namespace Coticula.Protex.Executers
             //set memory limit
             if (executerStartInfo.MemoryLimit > 0)
             {
-                options += string.Format(" -m {0}K", executerStartInfo.MemoryLimit/1024);
+                options += string.Format(" -m {0}K", executerStartInfo.MemoryLimit / 1024);
             }
 
             //set working directory
@@ -61,7 +83,7 @@ namespace Coticula.Protex.Executers
 
             //result of runexe in XML format
             options += " -xml";
-            
+
             var startInfo = new ProcessStartInfo
                                 {
                                     UseShellExecute = false,
@@ -85,42 +107,83 @@ namespace Coticula.Protex.Executers
 
                 var stdoutReader = _process.StandardOutput;
 
-                // implementation of TimeLimit: wait for process
-                // only some time, than kill it
-                var milliseconds = (int)executerStartInfo.TimeLimit*2;
-                _process.WaitForExit(milliseconds);
-
-                // kill the process after waiting
-                if (!_process.HasExited)
+                if (executerStartInfo.TimeLimit != 0)
                 {
-                    try
+                    // implementation of TimeLimit: wait for process
+                    // only some time, than kill it
+                    var milliseconds = (int)executerStartInfo.TimeLimit * 2;
+                    _process.WaitForExit(milliseconds);
+
+                    // kill the process after waiting
+                    if (!_process.HasExited)
                     {
-                        _process.Kill();
+                        try
+                        {
+                            _process.Kill();
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+
+                        // after kill return time limit
+                        //return this.SetResult(Verdict.TL, "Time limit occured");
+
+                        conclusion.ExecutionVerdict = ExecutionVerdict.TimeLimitExceeded;
+
+                        if (string.IsNullOrEmpty(temporaryOutputFile)==false)
+                        {
+                            File.Delete(temporaryOutputFile);
+                        }
+                        if (string.IsNullOrEmpty(temporaryErrorFile) == false)
+                        {
+                            File.Delete(temporaryErrorFile);
+                        }
+
+                        return conclusion;
                     }
-                    catch
-                    {
-                    }
-
-                    // after kill return time limit
-                    //return this.SetResult(Verdict.TL, "Time limit occured");
-
-                    conclusion.UsedTime = _process.UserProcessorTime.Ticks;
-
-                    throw new NotImplementedException("to long");
                 }
 
                 string xml = stdoutReader.ReadToEnd();
+                //Console.WriteLine(xml);
                 InvocationResult invocationResult = InvocationResult.DeserializeFromXml(xml);
-                Console.WriteLine(xml);
 
-                conclusion.UsedMemory = invocationResult.ConsumedMemory;
+                switch (invocationResult.InvocationVerdict)
+                {
+                    case "SUCCESS":
+                        conclusion.ExecutionVerdict = ExecutionVerdict.Success;
+                        conclusion.UsedMemory = invocationResult.ConsumedMemory;
+                        conclusion.UsedTime = invocationResult.ProcessorKernelModeTime +
+                                              invocationResult.ProcessorUserModeTime;
+                        break;
+                    case "IDLENESS_LIMIT_EXCEEDED":
+                    case "TIME_LIMIT_EXCEEDED":
+                        conclusion.ExecutionVerdict = ExecutionVerdict.TimeLimitExceeded;
+                        break;
+                    case "MEMORY_LIMIT_EXCEEDED":
+                        conclusion.ExecutionVerdict = ExecutionVerdict.MemoryLimitExceeded;
+                        break;
+                    default:
+                        throw new InvalidOperationException(string.Format("InvocationVerdict \"{0}\" from runexe does not understand.", invocationResult.InvocationVerdict));
+                }
+
                 conclusion.ReturnCode = invocationResult.ExitCode;
-                conclusion.UsedTime = invocationResult.ProcessorKernelModeTime + invocationResult.ProcessorUserModeTime;
+                if (invocationResult.ExitCode != 0)
+                    conclusion.ExecutionVerdict = ExecutionVerdict.RuntimeError;
             }
             catch (Exception exception)
             {
 
                 throw;
+            }
+
+            if (string.IsNullOrEmpty(temporaryOutputFile) == false && File.Exists(temporaryOutputFile))
+            {
+                File.Delete(temporaryOutputFile);
+            }
+            if (string.IsNullOrEmpty(temporaryErrorFile) == false && File.Exists(temporaryErrorFile))
+            {
+                File.Delete(temporaryErrorFile);
             }
 
             return conclusion;

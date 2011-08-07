@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Coticula.Protex.Tests;
 using NUnit.Framework;
 
@@ -8,24 +7,120 @@ namespace Coticula.Protex.Executers
     [TestFixture]
     public class SimpleExecuterTest
     {
-        private string testDataFolder = Path.Combine(TestHelper.TestDataFolder, "Executers", "SimpleExecuter");
+        private readonly string _testDataFolder = Path.Combine(TestHelper.TestDataFolder, "Executers", "SimpleExecuter");
 
         [Test]
-        public void F()
+        public void TestSuccessRun()
         {
 
+            for (int i = 0; i < 1; i++)
+            {
+                var simpleExecuter = new SimpleExecuter();
+                var startInfo = new ExecuterStartInfo
+                                    {
+                                        Command = Path.Combine(_testDataFolder, "outabc.exe"),
+                                    };
+                Conclusion conclusion = simpleExecuter.Run(startInfo);
+                Assert.AreEqual(ExecutionVerdict.Success, conclusion.ExecutionVerdict);
+            }
+        }
+
+        [Test]
+        public void TestMemoryLimitExceededRun()
+        {
             var simpleExecuter = new SimpleExecuter();
             var startInfo = new ExecuterStartInfo
                                 {
-                                    Command = Path.Combine(testDataFolder, "outabc.exe"),
-                                    OutputStream = "a.out"
+                                    Command = Path.Combine(_testDataFolder, "outabc.exe"),
+                                    MemoryLimit = 1024 * 1024
                                 };
-            startInfo.Command = "a.exe";
-            startInfo.InputStream = "a.in";
-            startInfo.ErrorStream = "a.err";
-            startInfo.TimeLimit = 3800;
-            startInfo.MemoryLimit = 2048*1024;
-            simpleExecuter.Run(startInfo);
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.MemoryLimitExceeded, conclusion.ExecutionVerdict);
+        }
+
+        [Test]
+        public void TestTimeLimitExceededRun()
+        {
+            var simpleExecuter = new SimpleExecuter();
+            var startInfo = new ExecuterStartInfo
+            {
+                Command = Path.Combine(_testDataFolder, "timeLimit3secs.exe"),
+                TimeLimit = 2000
+            };
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.TimeLimitExceeded, conclusion.ExecutionVerdict);
+        }
+
+        [Test]
+        public void TestTimeLimitExceededWithWaitInputRun()
+        {
+            var simpleExecuter = new SimpleExecuter();
+            var startInfo = new ExecuterStartInfo
+            {
+                Command = Path.Combine(_testDataFolder, "timeLimitWithWaitInput.exe")
+            };
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.RuntimeError, conclusion.ExecutionVerdict);
+            Assert.AreEqual(6, conclusion.ReturnCode);
+        }
+
+        [Test]
+        public void TestWithInputRun()
+        {
+            var simpleExecuter = new SimpleExecuter();
+            var startInfo = new ExecuterStartInfo
+                                {
+                                    Command = Path.Combine(_testDataFolder, "Long3sec", "longwithread.exe"),
+                                    WorkingDirectory = Path.Combine(_testDataFolder, "Long3sec"),
+                                    InputStream = "longwithread.in"
+                                };
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.Success, conclusion.ExecutionVerdict);
+        }
+
+        [Test]
+        public void TestWithOutputRun()
+        {
+            var simpleExecuter = new SimpleExecuter();
+            var startInfo = new ExecuterStartInfo
+            {
+                Command = Path.Combine(_testDataFolder, "outabc.exe"),
+                OutputStream = "outabcexe.out",
+            };
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.Success, conclusion.ExecutionVerdict);
+            
+            Assert.True(File.Exists(startInfo.OutputStream));
+
+            string outputString = File.ReadAllText(startInfo.OutputStream);
+
+            Assert.AreEqual("abc", outputString);
+
+            if (File.Exists(startInfo.OutputStream))
+                File.Delete(startInfo.OutputStream);
+        }
+
+        [Test]
+        public void TestWithErrorRun()
+        {
+            var simpleExecuter = new SimpleExecuter();
+            var startInfo = new ExecuterStartInfo
+            {
+                Command = Path.Combine(_testDataFolder, "timeLimitWithWaitInput.exe"),
+                ErrorStream = "outabcexe.err",
+            };
+            Conclusion conclusion = simpleExecuter.Run(startInfo);
+            Assert.AreEqual(ExecutionVerdict.RuntimeError, conclusion.ExecutionVerdict);
+            Assert.AreEqual(6, conclusion.ReturnCode);
+
+            Assert.True(File.Exists(startInfo.ErrorStream));
+
+            string errorString = File.ReadAllText(startInfo.ErrorStream);
+
+            Assert.AreEqual("abc", errorString);
+
+            if (File.Exists(startInfo.ErrorStream))
+                File.Delete(startInfo.ErrorStream);
         }
     }
 }
