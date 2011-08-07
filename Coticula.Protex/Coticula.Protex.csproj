@@ -52,13 +52,13 @@
     <Compile Include="Conclusion.cs" />
     <Compile Include="ExecuterCreator.cs" />
     <Compile Include="ExecuterStartInfo.cs" />
+    <Compile Include="Executers\RunexeExecuter.cs" />
     <Compile Include="Executers\runexe\InvocationResult.cs" />
-    <Compile Include="Executers\SimpleExecuter.cs" />
     <Compile Include="ExecutionVerdict.cs" />
     <Compile Include="IExecuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Executers\RunexeExecuterTest.cs" />
     <Compile Include="Tests\Executers\runexe\InvocationResultTest.cs" />
-    <Compile Include="Tests\Executers\SimpleExecuterTest.cs" />
     <Compile Include="Tests\TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>

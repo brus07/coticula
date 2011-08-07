@@ -9,7 +9,7 @@ namespace Coticula.Protex.Tests
         [Ignore]
         public void TestSimpleExecuterWithPrimitiveRun()
         {
-            IExecuter executer = ExecuterCreator.CreateSimpleExecuter();
+            IExecuter executer = ExecuterCreator.CreateRunexeExecuter();
             ExecuterStartInfo executerStartInfo = ExecuterStartInfo.CreateInstance();
             Conclusion conclusion = executer.Run(executerStartInfo);
         }

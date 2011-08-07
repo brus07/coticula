@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Coticula.Protex.Executers
 {
     [TestFixture]
-    public class SimpleExecuterTest
+    public class RunexeExecuterTest
     {
         private readonly string _testDataFolder = Path.Combine(TestHelper.TestDataFolder, "Executers", "SimpleExecuter");
 
@@ -15,7 +15,7 @@ namespace Coticula.Protex.Executers
 
             for (int i = 0; i < 1; i++)
             {
-                var simpleExecuter = new SimpleExecuter();
+                var simpleExecuter = new RunexeExecuter();
                 var startInfo = new ExecuterStartInfo
                                     {
                                         Command = Path.Combine(_testDataFolder, "outabc.exe"),
@@ -28,7 +28,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestMemoryLimitExceededRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
                                 {
                                     Command = Path.Combine(_testDataFolder, "outabc.exe"),
@@ -41,7 +41,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestTimeLimitExceededRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
             {
                 Command = Path.Combine(_testDataFolder, "timeLimit3secs.exe"),
@@ -54,7 +54,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestTimeLimitExceededWithWaitInputRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
             {
                 Command = Path.Combine(_testDataFolder, "timeLimitWithWaitInput.exe")
@@ -67,7 +67,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestWithInputRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
                                 {
                                     Command = Path.Combine(_testDataFolder, "Long3sec", "longwithread.exe"),
@@ -81,7 +81,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestWithOutputRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
             {
                 Command = Path.Combine(_testDataFolder, "outabc.exe"),
@@ -103,7 +103,7 @@ namespace Coticula.Protex.Executers
         [Test]
         public void TestWithErrorRun()
         {
-            var simpleExecuter = new SimpleExecuter();
+            var simpleExecuter = new RunexeExecuter();
             var startInfo = new ExecuterStartInfo
             {
                 Command = Path.Combine(_testDataFolder, "timeLimitWithWaitInput.exe"),

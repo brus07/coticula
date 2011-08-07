@@ -6,7 +6,7 @@ using Coticula.Protex.Executers.runexe;
 
 namespace Coticula.Protex.Executers
 {
-    internal class SimpleExecuter : IExecuter
+    internal class RunexeExecuter : IExecuter
     {
         private Process _process;
 
