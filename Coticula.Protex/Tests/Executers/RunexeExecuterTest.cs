@@ -100,7 +100,7 @@ namespace Coticula.Protex.Executers
                 File.Delete(startInfo.OutputStream);
         }
 
-        [Test]
+        [Test, Ignore]
         public void TestWithErrorRun()
         {
             var simpleExecuter = new RunexeExecuter();
