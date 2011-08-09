@@ -7,7 +7,7 @@ namespace Coticula.Protex.Executers
     [TestFixture]
     public class RunexeExecuterTest
     {
-        private readonly string _testDataFolder = Path.Combine(TestHelper.TestDataFolder, "Executers", "SimpleExecuter");
+        private readonly string _testDataFolder = Path.Combine(TestHelper.TestDataFolder, "Executers", "RunexeExecuter");
 
         [Test]
         public void TestSuccessRun()
